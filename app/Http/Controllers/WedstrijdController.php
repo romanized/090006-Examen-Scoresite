@@ -9,7 +9,7 @@ class WedstrijdController extends Controller
 {
     public function index()
     {
-        $wedstrijden = Wedstrijd::orderBy('datum', 'desc')->get();
+        $wedstrijden = Wedstrijd::with(['thuisTeam', 'uitTeam'])->orderBy('datum', 'desc')->get();
 
         return view('wedstrijden.index', compact('wedstrijden'));
     }

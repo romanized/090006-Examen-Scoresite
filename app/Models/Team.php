@@ -15,8 +15,16 @@ class Team extends Model
         'logo_url',
     ];
 
-    public function spelers()
-    {
-        return $this->hasMany(\App\Models\Speler::class);
+    public function spelers() {
+        return $this->hasMany(Speler::class);
     }
+    
+    public function thuiswedstrijden() {
+        return $this->hasMany(Wedstrijd::class, 'thuis_team_id');
+    }
+    
+    public function uitwedstrijden() {
+        return $this->hasMany(Wedstrijd::class, 'uit_team_id');
+    }
+    
 }
