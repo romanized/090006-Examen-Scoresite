@@ -8,7 +8,11 @@
     <h2 class="text-xl font-semibold mt-8 mb-2">Spelers</h2>
     <ul class="list-disc ml-6">
         @forelse($team->spelers as $speler)
-            <li>{{ $speler->naam }} ({{ $speler->positie ?? 'onbekend' }})</li>
+        <li>
+            <a href="{{ route('public.spelers.show', $speler->id) }}" class="text-blue-600 hover:underline">
+                {{ $speler->naam }}
+            </a> ({{ $speler->positie ?? 'onbekend' }})
+        </li>
         @empty
             <li>Geen spelers gevonden.</li>
         @endforelse

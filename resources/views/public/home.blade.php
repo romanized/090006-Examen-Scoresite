@@ -19,5 +19,8 @@
     @empty
         <p class="text-gray-500">Geen geplande wedstrijden gevonden.</p>
     @endforelse
+
+    @include('components.public.teams-preview')
+    @include('components.public.spelers-preview', ['spelers' => $spelers])
 </div>
 @endsection
