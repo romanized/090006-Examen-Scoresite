@@ -7,11 +7,17 @@ use App\Http\Controllers\TeamController;
 use App\Http\Controllers\SpelerController;
 use App\Http\Controllers\PublicController;
 
-// 🔓 Publieke routes
+// Publieke routes
 Route::get('/', [PublicController::class, 'home'])->name('home');
 Route::get('/teams', [PublicController::class, 'teams'])->name('public.teams');
+Route::get('/spelers', [PublicController::class, 'spelers'])->name('public.spelers.index');
+Route::get('/teams-publiek', [PublicController::class, 'teams'])->name('public.teams');
+Route::get('/alle-spelers', [PublicController::class, 'spelers'])->name('public.spelers.index');
 
-// 🔐 Admin-only routes
+
+
+
+// Admin-only routes
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', fn () => view('dashboard'))->middleware('verified')->name('dashboard');
 
@@ -32,7 +38,6 @@ Route::middleware(['auth'])->group(function () {
         ->except(['show']);
 });
 
-// 🔓 Publieke DETAIL-pagina's – altijd als laatste!
 Route::get('/teams/{team}', [PublicController::class, 'showTeam'])->name('public.teams.show');
 Route::get('/wedstrijden/{wedstrijd}', [PublicController::class, 'showWedstrijd'])->name('public.wedstrijden.show');
 Route::get('/spelers/{speler}', [PublicController::class, 'showSpeler'])->name('public.spelers.show');

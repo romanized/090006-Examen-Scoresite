@@ -32,7 +32,6 @@ class WedstrijdController extends Controller
             'uit_score' => 'nullable|integer|min:0',
         ]);
     
-        // 🔧 Forceer juiste formaat
         $validated['datum'] = \Carbon\Carbon::parse($validated['datum'])->seconds(0);
     
         \App\Models\Wedstrijd::create($validated);

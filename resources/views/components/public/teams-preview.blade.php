@@ -1,18 +1,29 @@
-<div class="bg-white rounded shadow p-4 mb-6">
-    <h2 class="text-xl font-bold mb-3">Teams</h2>
-
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-        @foreach($teams as $team)
-            <a href="{{ route('public.teams.show', $team) }}" class="border p-3 rounded hover:shadow">
-                @if($team->logo_url)
-                    <img src="{{ $team->logo_url }}" alt="Logo {{ $team->naam }}" class="h-12 mx-auto mb-2 object-contain">
-                @endif
-                <div class="text-center font-semibold">{{ $team->naam }}</div>
-            </a>
-        @endforeach
+<div class="bg-white rounded-xl shadow p-6 mb-6">
+    <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-bold text-gray-800">Teams</h2>
+        <a href="{{ route('public.teams') }}" class="text-blue-600 hover:underline text-sm font-medium">Bekijk alle teams →</a>
     </div>
 
-    <div class="mt-4 text-right">
-        <a href="{{ route('teams.index') }}" class="text-blue-600 hover:underline text-sm">Bekijk alle teams →</a>
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-2 gap-6">
+        @foreach($teams as $team)
+            <a href="{{ route('public.teams.show', $team) }}"
+               class="flex items-center gap-4 bg-gray-50 border border-gray-200 p-4 rounded-lg hover:shadow-md transition-all duration-200">
+                @if($team->logo_url)
+                    <img src="{{ $team->logo_url }}" alt="Logo {{ $team->naam }}"
+                         class="w-14 h-14 object-contain rounded bg-white p-1 border border-gray-200">
+                @else
+                    <div class="w-14 h-14 flex items-center justify-center bg-gray-200 rounded text-gray-500 text-xl font-bold">
+                        {{ strtoupper(substr($team->naam, 0, 1)) }}
+                    </div>
+                @endif
+
+                <div>
+                    <div class="text-lg font-semibold text-gray-800">{{ $team->naam }}</div>
+                    @if($team->stad)
+                        <div class="text-sm text-gray-500">{{ $team->stad }}</div>
+                    @endif
+                </div>
+            </a>
+        @endforeach
     </div>
 </div>
